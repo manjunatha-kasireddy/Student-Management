@@ -13,9 +13,11 @@
             <input type="text" name="enroll_no" id="enroll_no" class="form-control"
                 value="{{$enrollments->enroll_no}}"></br>
 
-            <label>Batch</label></br>
+            <label>Batch Id</label></br>
             <input type="text" name="batch_id" id="batch_id" class="form-control"
                 value="{{$enrollments->batch_id}}"></br>
+
+
 
             <label>Student</label></br>
             <input type="text" name="student_id" id="student_id" class="form-control"

@@ -8,67 +8,67 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Student Management System</title>
     <style>
+    .sidebar {
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
+    }
+
+    /* Sidebar links */
+    .sidebar a {
+        display: block;
+        color: black;
+        padding: 16px;
+        text-decoration: none;
+    }
+
+    /* Active/current link */
+    .sidebar a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    /* Links on mouse-over */
+    .sidebar a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+
+    /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+    div.content {
+        margin-left: 200px;
+        padding: 1px 16px;
+        height: 1000px;
+    }
+
+    /* On screens that are less than 700px wide, make the sidebar into a topbar */
+    @media screen and (max-width: 700px) {
         .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
+            width: 100%;
+            height: auto;
+            position: relative;
         }
 
-        /* Sidebar links */
         .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
+            float: left;
         }
 
-        /* Active/current link */
-        .sidebar a.active {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        /* Links on mouse-over */
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
         div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
+            margin-left: 0;
         }
+    }
 
-        /* On screens that are less than 700px wide, make the sidebar into a topbar */
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .sidebar a {
-                float: left;
-            }
-
-            div.content {
-                margin-left: 0;
-            }
+    /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+    @media screen and (max-width: 400px) {
+        .sidebar a {
+            text-align: center;
+            float: none;
         }
-
-        /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -78,7 +78,7 @@
             <div class="col-md-3">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="#">
-                        <h2>Student Management Project</h2>
+                        <h2>Student Management</h2>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -92,25 +92,25 @@
 
     <div class="row">
         <div class="col-md-3">
-                
-        <div class="sidebar">
-            <a class="active" href="#home">Home</a>
-            <a href="{{ url('/students') }}">Student</a>
-            <a href="{{ url('/teachers') }}">teacher</a>
-            <a href="{{ url('/courses') }}">Cources</a>
-            <a href="{{ url('/batches') }}">Batches</a>
-            <a href="{{ url('/enrollments') }}">Enrollment</a>
-            <a href="{{ url('/payments') }}">Payment</a>
+
+            <div class="sidebar">
+                <a class="active" href="#home">Home</a>
+                <a href="{{ url('/students') }}">Student</a>
+                <a href="{{ url('/teachers') }}">teacher</a>
+                <a href="{{ url('/courses') }}">Cources</a>
+                <a href="{{ url('/batches') }}">Batches</a>
+                <a href="{{ url('/enrollments') }}">Enrollment</a>
+                <a href="{{ url('/payments') }}">Payment</a>
+            </div>
         </div>
-    </div> 
-    <div class="cl-md-9">
-        
+        <div class="cl-md-9">
 
 
-                           @yield('content')
- 
-   
-    </div>
+
+            @yield('content')
+
+
+        </div>
 
     </div>
 </body>

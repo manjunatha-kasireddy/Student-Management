@@ -16,19 +16,21 @@
                     <tr>
                         <th> #</th>
                         <th>Name</th>
-                        <th> Address</th>
+                        <th>Address</th>
                         <th>Mobile</th>
+
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($students as $item)
                     <tr>
-                       
+
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->address }}</td>
                         <td>{{ $item->mobile }}</td>
+
 
                         <td>
                             <a href="{{ url('/students/' . $item->id) }}" title="View Student"><button
@@ -43,7 +45,7 @@
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Student"
-                                    onclick="return confirm(&qout;confirm delete?&qout;)"><i class="fa fa-trash-o"
+                                    onclick="return confirm('confirm delete?')"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i>Delete</button>
                             </form>
                         </td>

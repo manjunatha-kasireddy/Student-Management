@@ -26,7 +26,7 @@
                 <tbody>
                     @foreach($enrollments as $item)
                     <tr>
-                       
+
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->enroll_no }}</td>
                         <td>{{ $item->batch->name}}</td>
@@ -42,12 +42,12 @@
                                     class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
                                         aria-hidden="true"></i>Edit</button></a>
 
-                            <form method="POST" action="{{ url('/enrollments' . '/' . $item->id) }}" accept-charset="UTF-8"
-                                style="display:inline">
+                            <form method="POST" action="{{ url('/enrollments' . '/' . $item->id) }}"
+                                accept-charset="UTF-8" style="display:inline">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Enrollment"
-                                    onclick="return confirm(&qout;confirm delete?&qout;)"><i class="fa fa-trash-o"
+                                    onclick="return confirm('confirm delete?')"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i>Delete</button>
                             </form>
                         </td>

@@ -43,7 +43,7 @@
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Payment"
-                                    onclick="return confirm(&qout;confirm delete?&qout;)"><i class="fa fa-trash-o"
+                                    onclick="return confirm('confirm delete?')"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i>Delete</button>
                             </form>
                             <a href="{{ url('report/report1/' . $item->id) }}" title="Edit Payment"><button

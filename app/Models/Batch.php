@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Batch extends Model
 {
-    protected $table = 'batches'; 
+    protected $table = 'batches';
     protected $primaryKey = 'id';
-      
-    protected $fillable  = ['name' , 'course_id' , 'start_date'];
+
+    protected $fillable = ['name', 'course_id', 'start_date'];
     use HasFactory;
 
-        public function course()
-        {
+    public function course()
+    {
         return $this->belongsTo(Course::class);
-        }
+    }
 }

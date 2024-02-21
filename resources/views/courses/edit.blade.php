@@ -8,7 +8,7 @@
             {!! csrf_field() !!}
             @method("PATCH")
             <input type="hidden" name="id" id="id" value="{{$courses->id}}" id="id" />
-            <label>Name</label></br>
+            <label>Course Name</label></br>
             <input type="text" name="name" id="name" value="{{$courses->name}}" class="form-control"></br>
             <label>Syllabus</label></br>
             <input type="text" name="syllabus" id="syllabus" value="{{$courses->syllabus}}" class="form-control"></br>

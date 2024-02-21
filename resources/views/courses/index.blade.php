@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th> #</th>
-                        <th>Name</th>
+                        <th>Course Name</th>
                         <th>Syllabus</th>
                         <th>Duration</th>
                         <th>Actions</th>
@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach($courses as $item)
                     <tr>
-                       
+
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->syllabus }}</td>
@@ -43,7 +43,7 @@
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Course"
-                                    onclick="return confirm(&qout;confirm delete?&qout;)"><i class="fa fa-trash-o"
+                                    onclick="return confirm('confirm delete?')"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i>Delete</button>
                             </form>
                         </td>

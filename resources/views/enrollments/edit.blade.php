@@ -19,7 +19,7 @@
 
 
 
-            <label>Student</label></br>
+            <label>Student Id</label></br>
             <input type="text" name="student_id" id="student_id" class="form-control"
                 value="{{$enrollments->student_id}}"></br>
 

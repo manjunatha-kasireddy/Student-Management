@@ -9,8 +9,8 @@
             @method("PATCH")
             <input type="hidden" name="id" id="id" value="{{$payments->id}}" id="id" />
             <label> Enrollment_No</label></br>
-            <select name="enrollment_id" id="enrollment_id" class="form-control">
-                @foreach($payments as $id => $enrollno)
+            <select name="enrollments_id" id="enrollments_id" class="form-control">
+                @foreach($enrollments as $id => $enrollno)
                 <option value="{{ $id }}">{{ $enrollno }}</option>
                 @endforeach
             </select>

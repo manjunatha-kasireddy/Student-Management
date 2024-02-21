@@ -15,7 +15,8 @@ class BatchController extends Controller
     public function index(): view
     {
         $batches = Batch::all();
-        return view('batches.index')->with('batches' , $batches);
+        return view('batches.index')->with('batches', $batches);
+
     }
 
     /**
@@ -23,9 +24,9 @@ class BatchController extends Controller
      */
     public function create(): view
     {
-     $courses = Course::pluck('name' , 'id');
-     return view('batches.create' , compact('courses'));
-    //  return view('batches.create');
+        $courses = Course::pluck('name', 'id');
+        return view('batches.create', compact('courses'));
+        //  return view('batches.create');
     }
 
     /**
@@ -33,14 +34,14 @@ class BatchController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
+
         $input = $request->all();
-      
+
         Batch::create($input);
-       
-        return redirect('batches')->with('flash_message' , 'Batch Addedd!');
+
+        return redirect('batches')->with('flash_message', 'Batch Addedd!');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -48,7 +49,7 @@ class BatchController extends Controller
     public function show(string $id): view
     {
         $batches = Batch::find($id);
-        return view('batches.show')->with('batches' , $batches);
+        return view('batches.show')->with('batches', $batches);
     }
 
     /**
@@ -57,7 +58,8 @@ class BatchController extends Controller
     public function edit(string $id): view
     {
         $batches = Batch::find($id);
-        return view('batches.edit')->with('batches' , $batches);
+
+        return view('batches.edit')->with('batches', $batches);
     }
 
 
@@ -68,15 +70,14 @@ class BatchController extends Controller
     {
         $batches = Batch::find($id);
         $input = $request->all();
-        $batches -> update($input);
-        return redirect('batches')->with('flash_message' , 'Batch Updated!');
+        $batches->update($input);
+        return redirect('batches')->with('flash_message', 'Batch Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id): RedirectResponse
-
     {
         Batch::destroy($id);
         return redirect('batches')->with('flash_message', 'Batch deleted!');

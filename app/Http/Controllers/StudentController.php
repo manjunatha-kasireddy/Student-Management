@@ -7,6 +7,7 @@ use illuminate\Http\RedirectResponse;
 use illuminate\Http\Response;
 use App\Models\Student;
 use illuminate\view\view;
+use Illuminate\Support\Facades\Validator;
 
 
 class StudentController extends Controller
@@ -17,7 +18,7 @@ class StudentController extends Controller
     public function index(): view
     {
         $students = Student::all();
-        return view('students.index')->with('students' , $students);
+        return view('students.index')->with('students', $students);
     }
 
     /**
@@ -25,7 +26,10 @@ class StudentController extends Controller
      */
     public function create(): view
     {
-      return view('students.create');
+        // $lastStudent = Student::latest()->first();
+        // $studentid = $lastStudent ? $lastStudent->id + 1 : 1;
+        return view('students.create');
+      //  session ()->flash('success', 'created succuessfully');
     }
 
     /**
@@ -33,12 +37,19 @@ class StudentController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
-        $input = $request->all();
-      
-        Student::create($input);
-       
-        return redirect('students')->with('flash_message' , 'student Addedd!');
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100|min:4',
+            'email' => 'required|email|unique:students,email',
+            'mobile' => 'required|numeric|min:10|unique:students,mobile'
+            // Add more validation rules as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        Student::create($request->all());
+        session()->flash('success', 'Stored successfully');
+        return redirect('students');
     }
 
     /**
@@ -47,7 +58,7 @@ class StudentController extends Controller
     public function show(string $id): view
     {
         $students = Student::find($id);
-        return view('students.show')->with('students' , $students);
+        return view('students.show')->with('students', $students);
     }
 
     /**
@@ -56,7 +67,8 @@ class StudentController extends Controller
     public function edit(string $id): view
     {
         $student = Student::find($id);
-        return view('students.edit')->with('students' , $student);
+        return view('students.edit')->with('students', $student);
+        // session ()->flash('success', 'edited succuessfully');
     }
 
     /**
@@ -64,19 +76,30 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100|min:4',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric'
+            // Add more validation rules as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $student = Student::find($id);
         $input = $request->all();
-        $student -> update($input);
-        return redirect('students')->with('flash_message' , 'student Updated!');
+        $student->update($input);
+        session()->flash('success', 'updated succuessfully');
+        return redirect('students');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id): RedirectResponse
-
     {
         Student::destroy($id);
-        return redirect('students')->with('flash_message', 'Student deleted!');
+        session()->flash('success', 'deleted succuessfully');
+        return redirect('students');
     }
 }

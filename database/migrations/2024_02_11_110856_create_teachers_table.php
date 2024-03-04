@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
+            
+            $table->unsignedBigInteger('course_name');
+            $table->unsignedBigInteger('batch_name');
+$table->unsignedFloat('batchtimings');
             $table->string('mobile');
             $table->timestamps();
         });

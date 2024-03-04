@@ -18,6 +18,7 @@
                         <th>Batch Name</th>
                         <th> Course</th>
                         <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->course->name }}</td>
                         <td>{{ $item->start_date }}</td>
+                        <td>{{ $item->end_date }}</td>
 
                         <td>
                             <a href="{{ url('/batches/' . $item->id) }}" title="View Course"><button

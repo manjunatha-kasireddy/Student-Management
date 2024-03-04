@@ -8,7 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +21,13 @@ use App\Http\Controllers\ReportController;
 */
 
 Route::get('/', function () {
+    return view('index');
+});
+Route::get('/', function () {
     return view('layout');
 });
+
+Route::resource('/homes', HomeController::class);
 Route::resource('/students', StudentController::class);
 Route::resource('/teachers', TeacherController::class);
 Route::resource('/courses', CourseController::class);

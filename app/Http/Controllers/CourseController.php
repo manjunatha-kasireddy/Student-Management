@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use illuminate\Http\RedirectResponse;
 use illuminate\Http\Response;
 use App\Models\Course;
+use Illuminate\Support\Facades\Validator;
 use illuminate\view\view;
 
 
@@ -26,6 +27,8 @@ class CourseController extends Controller
     public function create(): view
     {
       return view('courses.create');
+     // Session ()->flash('success', 'Course Created succuessfully');
+
     }
 
     /**
@@ -34,11 +37,24 @@ class CourseController extends Controller
     public function store(Request $request): RedirectResponse
     {
         
-        $input = $request->all();
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100|min:4',
+            'startdate'=> 'required|date',
+            'enddate'=>'required|date|after:startdate'
+
+            // Add more validation rules as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
       
-        Course::create($input);
-       
-        return redirect('courses')->with('flash_message' , 'course Addedd!');
+        Course::create($request->all());
+        session()->flash('success', 'Course Added succuessfully');
+
+        return redirect('courses');
     }
 
     /**
@@ -55,6 +71,8 @@ class CourseController extends Controller
      */
     public function edit(string $id): view
     {
+
+        
         $course = Course::find($id);
         return view('courses.edit')->with('courses' , $course);
     }
@@ -64,10 +82,25 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:100|min:4',
+            'startdate'=> 'required|date',
+            'enddate'=>'required|date|after:startdate'
+            // Add more validation rules as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $course = Course::find($id);
         $input = $request->all();
         $course -> update($input);
-        return redirect('courses')->with('flash_message' , 'Course Updated!');
+        session()->flash('success', 'updated succuessfully');
+
+        return redirect('courses');
+
     }
 
     /**
@@ -77,6 +110,9 @@ class CourseController extends Controller
 
     {
         Course::destroy($id);
-        return redirect('courses')->with('flash_message', 'Courses deleted!');
+        session()->flash('success', 'Deleted succuessfully');
+
+        return redirect('courses');
+
     }
 }

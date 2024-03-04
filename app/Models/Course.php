@@ -9,7 +9,7 @@ class Course extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'courses';   
-    protected $fillable  = ['name' , 'syllabus' , 'duration'];
+    protected $fillable  = ['name' , 'syllabus' , 'startdate','enddate'];
     use HasFactory;
     public function duration(){
         return $this->duration." Months";

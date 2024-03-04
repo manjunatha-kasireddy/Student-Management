@@ -10,7 +10,7 @@ class Batch extends Model
     protected $table = 'batches';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'course_id', 'start_date'];
+    protected $fillable = ['name', 'course_id', 'start_date','end_date'];
     use HasFactory;
 
     public function course()

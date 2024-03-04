@@ -8,6 +8,7 @@ use illuminate\Http\Response;
 use App\Models\Batch;
 use App\Models\Course;
 use illuminate\view\view;
+use Illuminate\Support\Facades\Validator;
 
 
 class BatchController extends Controller
@@ -34,12 +35,21 @@ class BatchController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:4|unique:batches,name',
+            'start_date'=> 'required|date'
+            // Add more validation rules as needed
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $input = $request->all();
 
         Batch::create($input);
+        session ()->flash('success', 'created succuessfully');
 
-        return redirect('batches')->with('flash_message', 'Batch Addedd!');
+        return redirect('batches');
     }
 
 
@@ -58,8 +68,8 @@ class BatchController extends Controller
     public function edit(string $id): view
     {
         $batches = Batch::find($id);
-
-        return view('batches.edit')->with('batches', $batches);
+$courses=Course::all();
+        return view('batches.edit',compact('batches','courses'))->with('batches', $batches);
     }
 
 

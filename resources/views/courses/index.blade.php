@@ -17,7 +17,8 @@
                         <th> #</th>
                         <th>Course Name</th>
                         <th>Syllabus</th>
-                        <th>Duration</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,7 +29,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->syllabus }}</td>
-                        <td>{{ $item->duration() }}</td>
+                        <td>{{ $item->startdate }}</td>
+                        <td>{{ $item->enddate }}</td>
 
                         <td>
                             <a href="{{ url('/courses/' . $item->id) }}" title="View Course"><button

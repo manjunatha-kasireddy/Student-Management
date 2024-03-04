@@ -11,17 +11,24 @@
 
             <label>Enroll No</label></br>
             <input type="text" name="enroll_no" id="enroll_no" class="form-control"
-                value="{{$enrollments->enroll_no}}"></br>
+                value="{{$enrollments->enroll_no}}" readonly=""></br>
 
-            <label>Batch Id</label></br>
-            <input type="text" name="batch_id" id="batch_id" class="form-control"
-                value="{{$enrollments->batch_id}}"></br>
+                <label for="batch_id">Batch Name</label><br>
+<select name="batch_id" id="batch_id" class="form-control">
+    @foreach($batches as $batch)
+        <option value="{{ $batch->id }}" @if($batch->id == $enrollments->batch_id) selected @endif>{{ $batch->name }}</option>
+    @endforeach
+</select><br>
+
 
 
 
             <label>Student Id</label></br>
-            <input type="text" name="student_id" id="student_id" class="form-control"
-                value="{{$enrollments->student_id}}"></br>
+            <select name="student_id" id="student_id" class="form-control">
+    @foreach($students as $student)
+        <option value="{{ $student->id }}" @if($student->id == $enrollments->student_id) selected @endif>{{ $student->name }}</option>
+    @endforeach
+</select><br>
 
             <label>Join_Date</label></br>
             <input type="text" name="join_date" id="join_date" class="form-control"

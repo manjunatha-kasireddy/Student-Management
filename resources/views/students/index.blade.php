@@ -14,24 +14,22 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th> #</th>
+                        <th> Id</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Mobile</th>
-
+                        <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($students as $item)
                     <tr>
-
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->address }}</td>
                         <td>{{ $item->mobile }}</td>
-
-
+                        <td>{{ $item->email }}</td>
                         <td>
                             <a href="{{ url('/students/' . $item->id) }}" title="View Student"><button
                                     class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>

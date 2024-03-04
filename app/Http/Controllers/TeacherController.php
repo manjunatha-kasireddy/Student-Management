@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use illuminate\Http\RedirectResponse;
 use illuminate\Http\Response;
 use App\Models\Teacher;
+use App\Models\Batch;
+use App\Models\Course;
 use illuminate\view\view;
 
 
@@ -25,7 +27,11 @@ class TeacherController extends Controller
      */
     public function create(): view
     {
-      return view('teachers.create');
+        $batches = Batch::pluck('name', 'id');
+        $courses = Course::pluck('name','id');
+        return view('teachers.create', compact('batches','courses'));
+
+    //   return view('teachers.create');
     }
 
     /**
@@ -79,4 +85,5 @@ class TeacherController extends Controller
         Teacher::destroy($id);
         return redirect('teachers')->with('flash_message', 'Teacher deleted!');
     }
+    
 }

@@ -16,7 +16,9 @@
                     <tr>
                         <th> #</th>
                         <th>Name</th>
-                        <th> Address</th>
+                        <th>Course Name</th>
+                        <th>Batch Name </th>
+                        <th>Batch Timings</th>
                         <th>Mobile</th>
                         <th>Actions</th>
                     </tr>
@@ -27,9 +29,10 @@
                        
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->address }}</td>
+                        <td>{{ $item->course_name}}</td>
+                        <td>{{ $item->batch_name}}</td>
+                        <td>{{ $item->batchtimings }}</td>
                         <td>{{ $item->mobile }}</td>
-
                         <td>
                             <a href="{{ url('/teachers/' . $item->id) }}" title="View Teacher"><button
                                     class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>

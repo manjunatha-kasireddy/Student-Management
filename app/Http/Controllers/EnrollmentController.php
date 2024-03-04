@@ -31,7 +31,9 @@ class EnrollmentController extends Controller
     {
         $batches = Batch::pluck('name', 'id');
         $students = Student::pluck('name', 'id');
-        return view('enrollments.create', compact('batches', 'students'));
+        $lastEnrollment = Enrollment::latest()->first(); // Get the latest enrollment
+        $enrollNo = $lastEnrollment ? $lastEnrollment->enroll_no + 1 : 1;
+        return view('enrollments.create', compact('batches', 'students'))->with('enroll_no', $enrollNo);
 
     }
 
@@ -40,11 +42,26 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $lastEnrollment = Enrollment::latest()->first(); // Get the latest enrollment
+        // $enrollNo = $lastEnrollment ? $lastEnrollment->enroll_no + 1 : 1;
 
-        Enrollment::create($input);
+        // Create the new enrollment
+        $enrollment = new Enrollment();
+        $enrollment->enroll_no = $request->enroll_no;
+        $enrollment->batch_id = $request->batch_id;
+        $enrollment->student_id = $request->student_id;
+        $enrollment->join_date = $request->join_date;
+        $enrollment->fee = $request->fee;
+        // Add other fields as needed...
 
-        return redirect('enrollments')->with('flash_message', 'Enrollment Addedd!');
+        // Save the enrollment
+        $enrollment->save();
+
+        // $input = $request->all();
+
+        // Enrollment::create($input);
+
+        return redirect('enrollments');
     }
 
     /**
@@ -63,7 +80,14 @@ class EnrollmentController extends Controller
     {
         $enrollments = Enrollment::find($id);
 
-        return view('enrollments.edit')->with('enrollments', $enrollments);
+
+        $enrollments = Enrollment::findOrFail($id);
+        $batches = Batch::all(); // Fetch all batches
+$students= Student::all();
+        return view('enrollments.edit', compact('enrollments', 'batches','students'));
+
+
+       // return view('enrollments.edit')->with('enrollments', $enrollments);
 
         // $enrollments = Enrollment::find($id);
         // return view('enrollments.edit')->with('enrollments', $enrollments);
@@ -72,12 +96,12 @@ class EnrollmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,string $id): RedirectResponse
     {
         $enrollments = Enrollment::find($id);
         $input = $request->all();
         $enrollments->update($input);
-        return redirect('enrollments')->with('flash_message', 'Enrollment Updated!');
+        return redirect('enrollments')->with('enrollments', $enrollments);
     }
 
     /**
